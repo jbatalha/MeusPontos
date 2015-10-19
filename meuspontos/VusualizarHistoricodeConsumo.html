@@ -1,22 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<script src="js/jquery.js"></script>
+
+
         <title>+Meus Pontos</title>
 
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-         <!-- Estilos da pagina -->
-        <link href="css/style.css" rel="stylesheet">
-
-        <!-- biblioteca Chart.js para criar graficos -->
-        <script src="js/Chart.min.js"></script>
-        <script src="js/jquery.js"></script>
-
-        <!-- Funções jquery -->
+        
+        
         <script type="text/javascript">
             $(function(){
                 $(".btsAlterar").hide();
@@ -28,9 +26,28 @@
                  $(".btConfirma").click(function(){
                     $(".btsAlterar").hide("1000");
                 });
+
                 
             });
         </script>
+
+<script>
+function mostrar_abas(obj) {
+
+     document.getElementById('div_aba1').style.display="none";
+      document.getElementById('div_aba2').style.display="none";
+
+   switch (obj.id) {
+      case 'mostra_aba1':
+      document.getElementById('div_aba1').style.display="block";
+      break
+      case 'mostra_aba2':
+      document.getElementById('div_aba2').style.display="block";
+      break
+   }
+}
+
+</script>
 
     </head>
 
@@ -74,76 +91,119 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <a type="button" class="btn btn-default navbar-btn btn-primary" href="RegistrarConsumo.html">Registrar Consumo</a>
                             <a type="button" class="btn btn-default navbar-btn btn-primary" href="ConsumoDiario.html">Consumo Diário</a>
-                            <a type="button" class="btn btn-default navbar-btn btn-primary" href="VisualizarHistoricodeConsumo.html">Histórico de Consumo</a>
+                            <a type="button" class="btn btn-default navbar-btn btn-primary" href="Historico.html">Histórico de Consumo</a>
                             <a type="button" class="btn btn-default navbar-btn btn-primary" href="TabelaDeAlimentos.html">Tabela de Alimentos</a>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>
             </div>
         </div>
+
+
         <!-- (body) o corpão -->
         <div class="row">
-            <div class="col-xs-10 col-xs-offset-1 bg-info">
-            
-                <div class="controleMeta" >
-                    <h2>Sua Meta: <small>50 pontos.</small></h2>
-                    <!--Alterar Meta-->
-                    <div class="input-group input-group-sm btAlterarMeta">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default btControleBts" type="button">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                Alterar Meta
-                            </button>
-                        </span>
-                    </div>
-                    <div class="clear" ></div>
-                    
-                    <div class="btsAlterar">
-                        <div class="btn-group" role="group" aria-label="...">
-                            <button type="button" class="btn btn-default btleft"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                            <input type="text" class="form-control ptInput" placeholder="Username" value="60 pts" readonly="readonly">
-                            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-minus" aria-hidden="true"></button>
-                        </div>
-                        <br/><br/>
-                        <button class="btConfirma">Confirmar</button>
-                        <button class="btConfirma">Cancelar</button>
-                    </div>
-                </div>
-                <br>
-                <br>
-            	<div class="box-chart">
-            		<canvas id="GraficoDonut" style="width:100%;"></canvas>
-            		<script type="text/javascript">
-                
-                	var options = {
-                        responsive:true
-                    };
+	    <div class="col-xs-10 col-xs-offset-1 bg-info">
+		
 
-                	var data = [
-                    {
-                        value: 20,
-                        color:"#d9534f",
-                        highlight: "#FF5A5E",
-                        label: "Pontos Consumidos"
-                	},
-                  
-                    {
-                        value: 10,
-                        color: "#5bc0de",
-                        highlight: "#5AD3D1",
-                        label: "Pontos Restantes"
-                    },
-                    ]
-                
-                    window.onload = function(){
-                    var ctx = document.getElementById("GraficoDonut").getContext("2d");
-                    var PizzaChart = new Chart(ctx).Doughnut(data, options);
-                    }
-                    </script>
-                </div>
-                <div class="alert alert-danger text-center" role="alert"><h3>Pontos Consumido: 20</h3></div>
-                <div class="alert alert-info text-center" role="alert"><h3>Pontos Restantes: 10</h3></div>
+            <div class="panel panel-warning ">
+  		<!-- Default panel contents -->
+  		<div class="panel-heading"><h4>Visualizar Histórico de Consumo</h4></div>
+
+  			<!-- Table -->
+  			<table class="table">
+    				<thead>
+				   <tr>
+				       <th>Data</th>
+				       <th>Pontos</th>
+				       <th></th>
+				   </tr>
+				</thead>
+				<tbody>
+				   <tr>
+				       <td>10/02/2015</td>
+				       <td>35 pontos</td>
+				       <td><a href="#" onclick="mostrar_abas(this);" id="mostra_aba1" >Visualizar detalhes</a></td>
+				   </tr>
+				   <tr>
+				       <td>11/02/2015</td>
+				       <td>30 pontos</td>
+				       <td><a href="#" onclick="mostrar_abas(this);" id="mostra_aba2" >Visualizar detalhes</a></td>
+				   </tr>
+  			</table>
+		</div>
+		<br>
+		<div id="div_aba2" style="display:none;">
+		       	<div class="panel panel-warning">
+  			<!-- Default panel contents -->
+  				<div class="panel-heading"><h4>Consumo do dia 11/02/2015</h4></div>
+  				<!-- Table -->
+  				<table class="table">
+    					<thead>
+				   	<tr>
+				       		<th>Alimento Consumido</th>
+				       		<th>Pontos</th>
+				   	</tr>
+					</thead>
+					<tbody>
+				   	<tr>
+				       		<td>Pera</td>
+				       		<td>5 pontos</td>
+				   	</tr>
+				   	<tr>
+				       		<td>Uva</td>
+				       		<td>4 pontos</td>
+				   	</tr>
+				   	<tr>
+				       		<td>Maçã</td>
+				       		<td>6 pontos</td>
+				   	</tr>
+				   	<tr>
+				       		<td>Salada Mista</td>
+				       		<td>8 pontos</td>
+				   	</tr>
+  				</table>
+				</div>
+			</div>
+		<div id="div_aba1" style="display:none;">
+                	<div class="panel panel-warning">
+  			<!-- Default panel contents -->
+  				<div class="panel-heading"><h4>Consumo do dia 10/02/2015</h4></div>
+  				<!-- Table -->
+  				<table class="table">
+    					<thead>
+				   	<tr>
+				       		<th>Alimento Consumido</th>
+				       		<th>Pontos</th>
+				   	</tr>
+					</thead>
+					<tbody>
+				   	<tr>
+				       		<td>Pera</td>
+				       		<td>5 pontos</td>
+				   	</tr>
+				   	<tr>
+				       		<td>Uva</td>
+				       		<td>4 pontos</td>
+				   	</tr>
+				   	<tr>
+				       		<td>Maçã</td>
+				       		<td>6 pontos</td>
+				   	</tr>
+				   	<tr>
+				       		<td>Salada Mista</td>
+				       		<td>8 pontos</td>
+				   	</tr>
+  				</table>
+				</div>
+			</div>
+		</div>
+		
+	    </div>
+
             </div>
+	    
+
+	    </div>
         </div>
     </body>
 </html>
